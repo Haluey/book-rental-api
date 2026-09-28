@@ -380,7 +380,7 @@ REST API의 대여 업무 흐름을 Postman으로 확인했습니다.
 Docker 이미지 빌드:
 
 ```powershell
-docker build -t bookrentalapi .
+docker build -t bookrentalapi -f BookRentalApi/Dockerfile BookRentalApi
 ```
 
 컨테이너 실행:

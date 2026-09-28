@@ -16,11 +16,11 @@ HTML/CSS/JavaScript 웹 관리 화면을 연동한 도서 대여 관리 시스�
 
 ### 대여 현황 및 반납 관리
 
-![대여 현황 및 반납 관리](./images/book-rental-dashboard.png)
+![대여 현황 및 반납 관리](../images/book-rental-dashboard.png)
 
 ### 도서 대여 및 이력 조회
 
-![도서 대여 및 이력 조회](./images/book-rental-history.png)
+![도서 대여 및 이력 조회](../images/book-rental-history.png)
 
 웹 관리 화면에서 다음 기능을 사용할 수 있습니다.
 
@@ -39,7 +39,7 @@ HTML/CSS/JavaScript 웹 관리 화면을 연동한 도서 대여 관리 시스�
 
 도서 분류, 도서, 회원, 대여 이력 간의 관계를 기준으로 데이터베이스를 구성했습니다.
 
-![ERD](./images/erd.png)
+![ERD](../images/erd.png)
 
 <br>
 
@@ -342,19 +342,19 @@ ASP.NET Core Web API와 통신합니다.
 
 ### 도서 대여 성공
 
-![도서 대여 성공](./images/rent-book-success.png)
+![도서 대여 성공](../images/rent-book-success.png)
 
 ### 중복 대여 차단
 
-![중복 대여 실패](./images/rent-book-duplicate-fail.png)
+![중복 대여 실패](../images/rent-book-duplicate-fail.png)
 
 ### 도서 반납
 
-![도서 반납 성공](./images/return-book-success.png)
+![도서 반납 성공](../images/return-book-success.png)
 
 ### 상세 대여 이력
 
-![대여 상세 조회](./images/rental-details.png)
+![대여 상세 조회](../images/rental-details.png)
 
 <br>
 
@@ -366,7 +366,7 @@ ASP.NET Core Web API를 Docker 이미지로 빌드하여
 ### 이미지 빌드
 
 ```powershell
-docker build -t bookrentalapi .
+docker build -t bookrentalapi -f BookRentalApi/Dockerfile BookRentalApi
 ```
 
 ### 컨테이너 실행
@@ -385,7 +385,7 @@ localhost:9090 → container:8080
 docker ps
 ```
 
-![Docker 실행 화면](./images/docker-container.png)
+![Docker 실행 화면](../images/docker-container.png)
 
 <br>
 
