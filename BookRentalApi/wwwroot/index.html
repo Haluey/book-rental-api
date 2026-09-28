@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>Book Rental Management</h1>
-        <p>도서 대여 현황과 이력을 관리합니다.</p>
+        <p>ASP.NET Core Web API와 MySQL 기반 도서 대여 관리 시스템</p>
     </header>
 
     <main>
@@ -30,6 +30,11 @@
                 <div class="summary-card">
                     <span>대여 중</span>
                     <strong id="activeRentals">0</strong>
+                </div>
+
+                <div class="summary-card">
+                    <span>전체 대여 이력</span>
+                    <strong id="totalRentals">0</strong>
                 </div>
             </div>
         </section>
@@ -61,15 +66,19 @@
             <h2>새 도서 대여</h2>
 
             <div class="rental-form">
-                <label for="memberSelect">회원</label>
-                <select id="memberSelect">
-                    <option value="">회원을 선택하세요</option>
-                </select>
+                <div class="rental-field">
+                    <label for="memberSelect">회원</label>
+                    <select id="memberSelect">
+                        <option value="">회원을 선택하세요</option>
+                    </select>
+                </div>
 
-                <label for="bookSelect">도서</label>
-                <select id="bookSelect">
-                    <option value="">도서를 선택하세요</option>
-                </select>
+                <div class="rental-field">
+                    <label for="bookSelect">도서</label>
+                    <select id="bookSelect">
+                        <option value="">도서를 선택하세요</option>
+                    </select>
+                </div>
 
                 <button type="button" id="rentButton" class="primary-button">
                     대여하기
@@ -79,6 +88,19 @@
 
         <section>
             <h2>전체 대여 이력</h2>
+
+            <div class="history-toolbar">
+                <input 
+                    type="text"
+                    id="historySearch"
+                    placeholder="도서명 또는 회원명 검색"
+                >
+
+                <button type="button" id="historyToggleButton" class="secondary-button">
+                    전체 보기
+                </button>
+
+            </div>
 
             <table>
                 <thead>
@@ -99,6 +121,7 @@
                 </tbody>
             </table>
         </section>
+
     </main>
 
 <script src="/js/app.js"></script>

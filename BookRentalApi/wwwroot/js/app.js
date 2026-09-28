@@ -1,19 +1,26 @@
-﻿async function loadSummary() {
+﻿
+let rentalHistoryData = [];
+let showAllHistory = false;
+
+async function loadSummary() {
     try {
-        const [booksResponse, availableResponse, activeResponse] =
+        const [booksResponse, availableResponse, activeResponse, rentalsResponse] =
             await Promise.all([
                 fetch('/api/books'),
                 fetch('/api/books/available'),
-                fetch('/api/rentals/active')
+                fetch('/api/rentals/active'),
+                fetch('/api/rentals/details')
             ]);
 
         const books = await booksResponse.json();
         const availableBooks = await availableResponse.json();
         const activeRentals = await activeResponse.json();
+        const rentals = await rentalsResponse.json();
 
         document.getElementById('totalBooks').textContent = books.length;
         document.getElementById('availableBooks').textContent = availableBooks.length;
         document.getElementById('activeRentals').textContent = activeRentals.length;
+        document.getElementById('totalRentals').textContent = rentals.length;
     }
     catch (error) {
         console.error('대여 현황 조회 중 오류가 발생했습니다.', error);
@@ -195,40 +202,49 @@ async function loadRentalHistory() {
         const response = await fetch('/api/rentals/details');
         const rentals = await response.json();
 
-        const tableBody = document.getElementById('rentalHistoryTableBody');
+        rentalHistoryData = rentals;
 
-        if (rentals.length === 0) {
-            tableBody.innerHTML = `
-                <tr>
-                    <td colspan="5" class="empty-message">
-                        대여 이력이 없습니다.
-                    </td>
-                </tr>
-            `;
-            return;
-        }
-
-        tableBody.innerHTML = rentals.map(rental => `
-            <tr>
-                <td>${rental.bookName}</td>
-                <td>${rental.memberName}</td>
-                <td>${formatDate(rental.rentalDate)}</td>
-                <td>${formatDate(rental.returnDate)}</td>
-                <td>
-                    <span class="status ${
-                                rental.status === '대여중'
-                                    ? 'status-renting'
-                                    : 'status-returned'
-                                }">
-                        ${rental.status}
-                    </span>
-                </td>
-            </tr>
-        `).join('');
+        renderRentalHistory(rentals);
     }
     catch (error) {
         console.error('대여 이력 조회 중 오류가 발생했습니다.', error);
     }
+}
+
+function renderRentalHistory(rentals) {
+    const tableBody = document.getElementById('rentalHistoryTableBody');
+
+    if (rentals.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty-message">
+                    검색 결과가 없습니다.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    const visibleRentals = showAllHistory
+        ? rentals
+        : rentals.slice(0, 5);
+
+    tableBody.innerHTML = visibleRentals.map(rental => `
+        <tr>
+            <td>${rental.bookName}</td>
+            <td>${rental.memberName}</td>
+            <td>${formatDate(rental.rentalDate)}</td>
+            <td>${formatDate(rental.returnDate)}</td>
+            <td>
+                <span class="status ${rental.status === '대여중'
+            ? 'status-renting'
+            : 'status-returned'
+        }">
+                    ${rental.status}
+                </span>
+            </td>
+        </tr>
+    `).join('');
 }
 
 loadSummary();
@@ -238,3 +254,37 @@ loadAvailableBooks();
 loadRentalHistory();
 
 document.getElementById('rentButton').addEventListener('click', rentBook);
+document
+    .getElementById('historySearch')
+    .addEventListener('input', function() {
+        const keyword = this.value.trim().toLowerCase();
+
+        const filtered = rentalHistoryData.filter(rental =>
+            rental.bookName.toLowerCase().includes(keyword) ||
+            rental.memberName.toLowerCase().includes(keyword)
+        );
+
+        renderRentalHistory(filtered);
+    });
+document
+    .getElementById('historyToggleButton')
+    .addEventListener('click', function() {
+        showAllHistory = !showAllHistory;
+
+        this.textContent = showAllHistory
+            ? '최근 5건 보기'
+            : '전체 보기';
+
+        const keyword = document
+            .getElementById('historySearch')
+            .value
+            .trim()
+            .toLowerCase();
+
+        const filtered = rentalHistoryData.filter(rental =>
+            rental.bookName.toLowerCase().includes(keyword) ||
+            rental.memberName.toLowerCase().includes(keyword)
+        );
+
+        renderRentalHistory(filtered);
+    });

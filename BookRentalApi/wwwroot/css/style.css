@@ -50,7 +50,7 @@ section h2 {
 
 .summary-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 18px;
 }
 
@@ -96,9 +96,43 @@ td {
 
 .rental-form {
     display: grid;
-    grid-template-columns: 100px 1fr 100px 1fr 120px;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr 110px;
+    gap: 44px;
+    align-items: end;
+}
+
+.rental-field {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
     align-items: center;
+}
+
+.rental-field label {
+    font-weight: 700;
+    color: #374151;
+}
+
+.rental-field select {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    font-size: 14px;
+}
+
+.rental-field select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.rental-form .primary-button {
+    height: 42px;
+    min-width: 110px;
+    white-space: nowrap;
 }
 
 label {
@@ -189,4 +223,75 @@ tbody tr:hover {
 
 .primary-button {
     min-width: 110px;
+}
+
+.history-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.history-toolbar input {
+    width: 320px;
+    max-width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.history-toolbar input:focus {
+    border-color: #2563eb;
+}
+
+.secondary-button {
+    background: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.secondary-button:hover {
+    background: #f3f4f6;
+}
+
+.summary-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #2563eb;
+}
+
+.summary-card:nth-child(2)::before {
+    background: #10b981;
+}
+
+.summary-card:nth-child(3)::before {
+    background: #f59e0b;
+}
+
+.summary-card:nth-child(4)::before {
+    background: #8b5cf6;
+}
+
+th {
+    font-weight: 700;
+}
+
+button {
+    transition: 0.2s ease;
+}
+
+button:active {
+    transform: translateY(1px);
 }
