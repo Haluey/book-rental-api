@@ -9,24 +9,34 @@ body {
     color: #222;
 }
 
+
+/* ==============================
+   Header
+   ============================== */
+
 header {
     background: #ffffff;
     border-bottom: 1px solid #e5e7eb;
     padding: 32px 40px 26px;
 }
 
-header h1 {
-    margin: 0 0 8px;
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
+    header h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
 
-header p {
-    margin: 0;
-    color: #6b7280;
-    font-size: 15px;
-}
+    header p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 15px;
+    }
+
+
+/* ==============================
+   Layout
+   ============================== */
 
 main {
     width: min(1180px, calc(100% - 48px));
@@ -34,19 +44,23 @@ main {
 }
 
 section {
+    margin-bottom: 24px;
+    padding: 24px;
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 14px;
-    padding: 24px;
-    margin-bottom: 24px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
-section h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 21px;
-}
+    section h2 {
+        margin: 0 0 18px;
+        font-size: 20px;
+    }
+
+
+/* ==============================
+   Summary
+   ============================== */
 
 .summary-cards {
     display: grid;
@@ -55,22 +69,53 @@ section h2 {
 }
 
 .summary-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
     padding: 22px;
     background: #fafafa;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
 }
 
-.summary-card span {
-    display: block;
-    color: #6b7280;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
+    .summary-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #2563eb;
+    }
 
-.summary-card strong {
-    font-size: 28px;
-}
+    .summary-card:nth-child(2)::before {
+        background: #10b981;
+    }
+
+    .summary-card:nth-child(3)::before {
+        background: #f59e0b;
+    }
+
+    .summary-card:nth-child(4)::before {
+        background: #8b5cf6;
+    }
+
+    .summary-card span {
+        display: block;
+        margin-bottom: 10px;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    .summary-card strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 30px;
+    }
+
+
+/* ==============================
+   Table
+   ============================== */
 
 table {
     width: 100%;
@@ -86,80 +131,122 @@ td {
 
 th {
     background: #f8fafc;
-    font-size: 14px;
     color: #4b5563;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 td {
     font-size: 14px;
 }
 
+tbody tr {
+    transition: background 0.15s ease;
+}
+
+    tbody tr:hover {
+        background: #f9fafb;
+    }
+
+.empty-message {
+    padding: 28px 12px;
+    text-align: center;
+    color: #9ca3af;
+}
+
+
+/* ==============================
+   Rental Form
+   ============================== */
+
 .rental-form {
     display: grid;
-    grid-template-columns: 1fr 1fr 110px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 110px;
     gap: 44px;
-    align-items: end;
+    align-items: center;
 }
 
 .rental-field {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     column-gap: 16px;
     align-items: center;
 }
 
-.rental-field label {
-    font-weight: 700;
-    color: #374151;
-}
+    .rental-field label {
+        font-weight: 700;
+        color: #374151;
+        white-space: nowrap;
+    }
 
-.rental-field select {
-    width: 100%;
-    height: 42px;
-    padding: 0 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
-    font-size: 14px;
-}
+    .rental-field select {
+        width: 100%;
+        height: 42px;
+        padding: 0 12px;
+        background: #ffffff;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+    }
 
-.rental-field select:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
-}
+        .rental-field select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+        }
 
-.rental-form .primary-button {
-    height: 42px;
-    min-width: 110px;
-    white-space: nowrap;
-}
 
-label {
-    font-weight: 600;
-}
-
-select {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: white;
-}
+/* ==============================
+   Buttons
+   ============================== */
 
 button {
     padding: 11px 16px;
     border: none;
     border-radius: 8px;
     background: #2563eb;
-    color: white;
+    color: #ffffff;
     font-weight: 600;
     cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background: #1d4ed8;
+    button:hover {
+        background: #1d4ed8;
+    }
+
+    button:active {
+        transform: translateY(1px);
+    }
+
+.primary-button {
+    min-width: 110px;
+    height: 42px;
+    white-space: nowrap;
 }
+
+.return-button {
+    background: #ef4444;
+}
+
+    .return-button:hover {
+        background: #dc2626;
+    }
+
+.secondary-button {
+    background: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+    .secondary-button:hover {
+        background: #f3f4f6;
+    }
+
+
+/* ==============================
+   Status
+   ============================== */
 
 .status {
     display: inline-block;
@@ -167,24 +254,6 @@ button:hover {
     border-radius: 999px;
     font-size: 12px;
     font-weight: 600;
-    background: #eef2ff;
-    color: #3730a3;
-}
-
-.empty-message {
-    text-align: center;
-    color: #9ca3af;
-    padding: 28px 12px;
-}
-
-@media (max-width: 800px) {
-    .summary-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .rental-form {
-        grid-template-columns: 1fr;
-    }
 }
 
 .status-renting {
@@ -197,33 +266,10 @@ button:hover {
     color: #047857;
 }
 
-.return-button {
-    background: #ef4444;
-}
 
-.return-button:hover {
-    background: #dc2626;
-}
-
-.summary-card strong {
-    display: block;
-    font-size: 30px;
-    margin-top: 4px;
-}
-
-section h2 {
-    margin-top: 0;
-    margin-bottom: 18px;
-    font-size: 20px;
-}
-
-tbody tr:hover {
-    background: #f9fafb;
-}
-
-.primary-button {
-    min-width: 110px;
-}
+/* ==============================
+   Rental History
+   ============================== */
 
 .history-toolbar {
     display: flex;
@@ -233,65 +279,64 @@ tbody tr:hover {
     margin-bottom: 16px;
 }
 
-.history-toolbar input {
-    width: 320px;
-    max-width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
+    .history-toolbar input {
+        width: 320px;
+        max-width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+    }
+
+        .history-toolbar input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
+        }
+
+
+/* ==============================
+   Responsive
+   ============================== */
+
+@media (max-width: 900px) {
+    .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rental-form {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .primary-button {
+        width: 100%;
+    }
 }
 
-.history-toolbar input:focus {
-    border-color: #2563eb;
-}
+@media (max-width: 600px) {
+    main {
+        width: min(100% - 24px, 1180px);
+    }
 
-.secondary-button {
-    background: #ffffff;
-    color: #374151;
-    border: 1px solid #d1d5db;
-}
+    header {
+        padding: 24px;
+    }
 
-.secondary-button:hover {
-    background: #f3f4f6;
-}
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
 
-.summary-card {
-    position: relative;
-    overflow: hidden;
-}
+    .history-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
 
-.summary-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: #2563eb;
-}
+        .history-toolbar input {
+            width: 100%;
+        }
 
-.summary-card:nth-child(2)::before {
-    background: #10b981;
-}
-
-.summary-card:nth-child(3)::before {
-    background: #f59e0b;
-}
-
-.summary-card:nth-child(4)::before {
-    background: #8b5cf6;
-}
-
-th {
-    font-weight: 700;
-}
-
-button {
-    transition: 0.2s ease;
-}
-
-button:active {
-    transform: translateY(1px);
+    .secondary-button {
+        width: 100%;
+    }
 }

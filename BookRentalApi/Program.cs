@@ -7,20 +7,12 @@ namespace BookRentalApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // DB 연결 문자열 가져오기
-            var connString = builder.Configuration.GetConnectionString("BookRentalDbConnection");
-
-            // Add services to the container.
             builder.Services.AddControllers();
-
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            if (app.Environment.IsDevelopment()) {
                 app.MapOpenApi();
             }
 
